@@ -1,56 +1,11 @@
-# a
+# happy-trails
 
-FIXME: Write a one-line description of your library/project.
+an in-development Chrome extension that provides a [spatial model](https://darkblueheaven.com/spatialsoftware/) for web navigation, inspired by [Patryk Adaś](https://www.freecodecamp.org/news/lossless-web-navigation-spatial-model-37f83438201d/)
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+Your web history should be a tree, not a list. Sometimes you follow a chain of links linearly, but everytime you open multiple links in a new tab, you are creating branching paths that your stroll through the Internet could follow. In all browsers creating new tabs divorces them from their history; they know not where they came from. 
 
 ## Setup
 
-Most of the following scripts require [rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) (on OS X installable via brew).
-
-Build your project once in dev mode with the following script and then open `index.html` in your browser.
-
-    ./scripts/build
-
-To auto build your project in dev mode:
-
-    ./scripts/watch
-
-To start an auto-building Node REPL:
-
-    ./scripts/repl
-
-To get source map support in the Node REPL:
-
-    lein npm install
-    
-To start a browser REPL:
-    
-1. Uncomment the following lines in src/a/core.cljs:
-```clojure
-;; (defonce conn
-;;   (repl/connect "http://localhost:9000/repl"))
-```
-2. Run `./scripts/brepl`
-3. Browse to `http://localhost:9000` (you should see `Hello world!` in the web console)
-4. (back to step 3) you should now see the REPL prompt: `cljs.user=>`
-5. You may now evaluate ClojureScript statements in the browser context.
-    
-For more info using the browser as a REPL environment, see
-[this](https://github.com/clojure/clojurescript/wiki/The-REPL-and-Evaluation-Environments#browser-as-evaluation-environment).
-    
-Clean project specific out:
-
-    lein clean
-     
-Build a single release artifact with the following script and then open `index_release.html` in your browser.
-
-    ./scripts/release
-
-## License
-
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+None, you are already complete :)
