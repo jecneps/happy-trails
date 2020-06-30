@@ -86,13 +86,6 @@ return elem;
 return cljs.core.first.call(null,cljs.core.filterv.call(null,cljs.core.partial.call(null,a.core.hasClass_QMARK_,"taken"),cljs.core.array_seq.call(null,next.children)));
 }
 });
-cljs.core.println.call(null,clojure.string.split.call(null,"hi i can help",/ /));
-console.log(cljs.core.filter.call(null,(function (p1__2647_SHARP_){
-return cljs.core._EQ_.call(null,(1),p1__2647_SHARP_);
-}),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [(1),(2),(3)], null)));
-console.log(cljs.core.filterv.call(null,(function (p1__2648_SHARP_){
-return cljs.core._EQ_.call(null,(1),p1__2648_SHARP_);
-}),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [(1),(2),(3)], null)));
 a.core.keymap = new cljs.core.PersistentArrayMap(null, 4, ["ArrowDown",new cljs.core.Keyword(null,"down","down",1565245570),"ArrowUp",new cljs.core.Keyword(null,"up","up",-269712113),"ArrowLeft",new cljs.core.Keyword(null,"left","left",-399115937),"ArrowRight",new cljs.core.Keyword(null,"right","right",-452581833)], null);
 a.core.keyFocusHandler = (function a$core$keyFocusHandler(e){
 if(cljs.core.contains_QMARK_.call(null,a.core.keymap,e.key)){
@@ -108,14 +101,14 @@ return null;
 });
 window.addEventListener("keydown",a.core.keyFocusHandler);
 a.core.branch = rum.core.lazy_build.call(null,rum.core.build_defc,(function (nodes){
-var attrs2649 = a.core.data2Branch.call(null,nodes);
-return cljs.core.apply.call(null,React.createElement,"div",((cljs.core.map_QMARK_.call(null,attrs2649))?sablono.interpreter.attributes.call(null,sablono.normalize.merge_with_class.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["branch"], null)], null),attrs2649)):({"className": "branch"})),((cljs.core.map_QMARK_.call(null,attrs2649))?null:new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [sablono.interpreter.interpret.call(null,attrs2649)], null)));
+var attrs2647 = a.core.data2Branch.call(null,nodes);
+return cljs.core.apply.call(null,React.createElement,"div",((cljs.core.map_QMARK_.call(null,attrs2647))?sablono.interpreter.attributes.call(null,sablono.normalize.merge_with_class.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["branch"], null)], null),attrs2647)):({"className": "branch"})),((cljs.core.map_QMARK_.call(null,attrs2647))?null:new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [sablono.interpreter.interpret.call(null,attrs2647)], null)));
 }),null,"a.core/branch");
 a.core.tree = rum.core.lazy_build.call(null,rum.core.build_defc,(function (data){
-var attrs2651 = cljs.core.map.call(null,(function (p1__2650_SHARP_){
-return a.core.branch.call(null,p1__2650_SHARP_);
+var attrs2649 = cljs.core.map.call(null,(function (p1__2648_SHARP_){
+return a.core.branch.call(null,p1__2648_SHARP_);
 }),data);
-return cljs.core.apply.call(null,React.createElement,"div",((cljs.core.map_QMARK_.call(null,attrs2651))?sablono.interpreter.attributes.call(null,sablono.normalize.merge_with_class.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["tree"], null)], null),attrs2651)):({"className": "tree"})),((cljs.core.map_QMARK_.call(null,attrs2651))?null:new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [sablono.interpreter.interpret.call(null,attrs2651)], null)));
+return cljs.core.apply.call(null,React.createElement,"div",((cljs.core.map_QMARK_.call(null,attrs2649))?sablono.interpreter.attributes.call(null,sablono.normalize.merge_with_class.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["tree"], null)], null),attrs2649)):({"className": "tree"})),((cljs.core.map_QMARK_.call(null,attrs2649))?null:new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [sablono.interpreter.interpret.call(null,attrs2649)], null)));
 }),null,"a.core/tree");
 a.core.dummyValues = new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/instructables.png","Yours for the making - Instructables"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/twitter.png","Home / Twitter"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/roam.png","A tool for networked thought"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/stackoverflow.png","html- using ico as a"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/lw.png","LessWrong"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/azl.png","AZL"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/ssc.png","Slate Star Codex"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/github.png","Github: Home for your code"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["assets/favicons/google.png","Google"], null)], null);
 a.core.dummyTree = (new cljs.core.PersistentVector(null,5,(5),cljs.core.PersistentVector.EMPTY_NODE,[a.core.dummyValues,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.nth.call(null,a.core.dummyValues,(3))], null),cljs.core.vec.call(null,cljs.core.drop.call(null,(4),cljs.core.take.call(null,(7),a.core.dummyValues))),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.nth.call(null,a.core.dummyValues,(7))], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.nth.call(null,a.core.dummyValues,(8))], null)],null));

@@ -51,10 +51,6 @@
 						elem
 						(first (filterv (partial hasClass? "taken") (array-seq (. next -children)))))))
 
-(println (str/split "hi i can help" #" "))
-(js/console.log (filter #(= 1 %1) [1 2 3]))
-(js/console.log (filterv #(= 1 %1) [1 2 3]))
-		
 
 (def keymap {"ArrowDown" :down 
 													"ArrowUp" :up 

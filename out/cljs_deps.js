@@ -22,4 +22,5 @@ goog.addDependency("../rum/util.js", ['rum.util'], ['cljs.core']);
 goog.addDependency("../rum/core.js", ['rum.core'], ['goog.functions', 'rum.cursor', 'cljs.core', 'goog.object', 'cljsjs.react', 'rum.derived_atom', 'sablono.core', 'cljsjs.react.dom', 'rum.util']);
 goog.addDependency("../a/core.js", ['a.core'], ['clojure.browser.repl', 'rum.core', 'cljs.core', 'clojure.string']);
 goog.addDependency("../clojure/zip.js", ['clojure.zip'], ['cljs.core']);
-goog.addDependency("../tree/cljs.js", ['tree.cljs'], ['clojure.zip', 'cljs.core']);
+goog.addDependency("../cljs/core/match.js", ['cljs.core.match'], ['cljs.core']);
+goog.addDependency("../tree/core.js", ['tree.core'], ['clojure.zip', 'cljs.core', 'cljs.core.match']);
