@@ -10,6 +10,8 @@
 
 (println "Hello world!")
 
+;;##############################################
+;; COMPS and COMP building code
 
 (rum/defc text [t] [:div.node-text t])
 
@@ -17,23 +19,32 @@
 		[:div 
 				[:img.node-img {:src img_path}]])
 
-(rum/defc node [img_path t nodeType]
+(rum/defc node [page nodeType]
 		(case nodeType
-				:taken [:button.node.taken (favicon img_path) (text t)]
-				:untaken [:button.node.untaken (favicon img_path) (text t)])
+				:taken [:button.node.taken (favicon (:favicon page)) (text (:preText page))]
+				:untaken [:button.node.untaken (favicon (:favicon page)) (text (:preText page))])
 		)
 
-(defn data2Nodes [data]
-		(map (fn [[img_path t]] (node img_path t :untaken)) data))
+(defn pages->nodes [data]
+		(map (fn [page] (node page :untaken)) data))
 
-(defn data2Branch [[[img_path t] left right]]
-		(concat (data2Nodes left) [(node img_path t :taken)] (data2Nodes right)))
+(defn data->branch [[page left right]]
+		(concat (data2Nodes left) [(node page :taken)] (data2Nodes right)))
 
-(defn horizontalFocus [elem dir]
-		(let [next (dir {:right (. elem -nextElementSibling) :left (. elem -previousElementSibling)})] 
-				(if (= next nil)
-						elem
-						next)))
+(rum/defc branch [branchData]
+		[:div.branch (data->branch branchData)])
+
+(rum/defc tree [data]
+	[:div.tree (map #(branch %) data)])
+
+;;##################################################
+;; Event stuff
+;;##################################################
+
+(def keymap {"ArrowDown" :down 
+													"ArrowUp" :up 
+													"ArrowLeft" :left
+													"ArrowRight" :right})
 
 (defn hasClass? [class elem]
 		(some #(= %1 class) (str/split (.. elem -className) #" ")))
@@ -44,6 +55,14 @@
 						e
 						(recur (. e -nextElementSibling)))))
 
+
+
+(defn horizontalFocus [elem dir]
+		(let [next (dir {:right (. elem -nextElementSibling) :left (. elem -previousElementSibling)})] 
+				(if (= next nil)
+						elem
+						next)))
+
 (defn verticalFocus [elem dir]
 		(let [next (dir {:up (.. elem -parentElement -previousElementSibling) 
 																			:down (.. elem -parentElement -nextElementSibling)})]
@@ -52,10 +71,6 @@
 						(first (filterv (partial hasClass? "taken") (array-seq (. next -children)))))))
 
 
-(def keymap {"ArrowDown" :down 
-													"ArrowUp" :up 
-													"ArrowLeft" :left
-													"ArrowRight" :right})
 
 (defn keyFocusHandler [e]
 		(if (contains? keymap (. e -key))
@@ -67,11 +82,7 @@
 
 (.addEventListener js/window "keydown" keyFocusHandler)
 
-(rum/defc branch [nodes]
-		[:div.branch (data2Branch nodes)])
 
-(rum/defc tree [data]
-	[:div.tree (map #(branch %1) data)])
 
 
 
@@ -95,6 +106,7 @@
 																[(nth dummyValues 4) () ()]])
 
 
+;;tree data struct [[node [nodes-to-the-left] [nodes-to-the-right]]....]
 
 (rum/mount (tree dummyTree) js/document.body)
 
