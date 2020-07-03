@@ -34,7 +34,7 @@
 ;returns loc that zip/next would if it skipped all children
 (defn nextSkipChildren [loc]
 		(loop [l (zip/next loc)]
-				(match [(zip/end? l) (true? (some #(= (zip/node loc) %) (zip/path l)))]
+				(match [(zip/end? l) (true? (some #(identical? (zip/node loc) %) (zip/path l)))]
 						[true _] l
 						[false false] l ;;does it inclued itself in the path? (NOPE)
 						[false true] (recur (zip/next l))
@@ -84,9 +84,10 @@
 (defn getLeaves [loc]
 		(let [right [] left []]
 				(loop [l (rootLoc loc) primary left secondary right]
+						(println (zip/node l))
 						(if (zip/end? l)
 								[secondary primary]
-								(match [(= (zip/node l) (zip/node loc)) (= nil (zip/branch? l))]
+								(match [(identical? (zip/node l) (zip/node loc)) (= nil (zip/branch? l))]
 										[true _] (recur (nextSkipChildren l) secondary primary) ;swap l&r, skip children
 										[false true] (recur (zip/next l) (conj primary (:self (zip/node l))) secondary) ;add leaf TODO get self
 										[false false] (recur (zip/next l)  primary secondary) ;nothing to see here

@@ -60,47 +60,37 @@
 																									(tree/shiftClick (rpage))
 																									(tree/shiftClick (rpage))
 																									(tree/shiftClick (rpage))
-																									(tree/shiftClick (rpage))))
+																									(tree/shiftClick (rpage))
+																									zip/down))
 
-(comment (def dummyZip (-> (rpage) 
+(def dummyZip (-> (rpage) 
 																		tree/page->zipNode
 																		tree/treeZip 
 																		(tree/shiftClick (rpage)) 
 																		zip/down
-																		(tree/shiftClick (rpage))
-																		(tree/shiftClick (rpage))
-																		zip/next
-																		zip/next
-																		(tree/shiftClick (rpage))
-																		zip/up
-																		zip/next
-																		(tree/shiftClick (rpage))
+																		(tree/shiftClick (rpage)) 
+																		(tree/shiftClick (rpage)) 
+																		(tree/shiftClick (rpage)) 
 																		zip/down
-																		(tree/shiftClick (rpage))
-																		(tree/shiftClick (rpage))
-																		(tree/shiftClick (rpage))
-																		(tree/shiftClick (rpage))
-																		zip/next
-																		(tree/shiftClick (rpage))
+																		(tree/shiftClick (rpage)) 
+																		(tree/shiftClick (rpage)) 
 																		zip/next
 																		zip/next
-																		(tree/shiftClick (rpage))
 																		zip/next
-																		(tree/shiftClick (rpage))
-																		zip/next
-																		(tree/shiftClick (rpage))
+																		(tree/shiftClick (rpage)) 
 																		zip/next
 																		zip/next
-																		(tree/shiftClick (rpage))
-																		zip/next
-																		zip/next
-																		(tree/shiftClick (rpage))
-																		)))
+																		(tree/shiftClick (rpage)) 
+																		(tree/shiftClick (rpage)) 
+																		zip/prev
+																		))
+
 
 (println "all parsed!")
 
 ;(println dummyLinearZip)
 
-(println (tree/zip->compData dummyLinearZip))
+(println (tree/zip->compData dummyZip))
+;(println (list (repeatedly 20 rpage)))
 
-(rum/mount (comp/tree (tree/zip->compData dummyLinearZip)) js/document.body)
+(rum/mount (comp/tree (tree/zip->compData dummyZip)) js/document.body)
