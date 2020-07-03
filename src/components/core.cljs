@@ -1,4 +1,4 @@
-(ns a.core
+(ns components.core
   (:require [clojure.browser.repl :as repl]
   										[rum.core :as rum]
   										[clojure.string :as str]))
@@ -8,10 +8,17 @@
 
 (enable-console-print!)
 
-(println "Hello world!")
+;;####################3
+;;
+;;#####################
+
+(defrecord Page [link favicon preText])
+
+
 
 ;;##############################################
 ;; COMPS and COMP building code
+;;##############################################
 
 (rum/defc text [t] [:div.node-text t])
 
@@ -29,13 +36,16 @@
 		(map (fn [page] (node page :untaken)) data))
 
 (defn data->branch [[page left right]]
-		(concat (data2Nodes left) [(node page :taken)] (data2Nodes right)))
+		(concat (pages->nodes left) [(node page :taken)] (pages->nodes right)))
 
 (rum/defc branch [branchData]
 		[:div.branch (data->branch branchData)])
 
 (rum/defc tree [data]
 	[:div.tree (map #(branch %) data)])
+
+;;MAYBE-TODO: react wants all children in a list to have a key,
+;; it somehow makes it easier for it to tell when to update
 
 ;;##################################################
 ;; Event stuff
@@ -83,27 +93,6 @@
 (.addEventListener js/window "keydown" keyFocusHandler)
 
 
-
-
-
-
-
-(def dummyValues [["assets/favicons/instructables.png" "Yours for the making - Instructables"] 
-																																						["assets/favicons/twitter.png" "Home / Twitter"] 
-																																						["assets/favicons/roam.png" "A tool for networked thought"] 
-																																						["assets/favicons/stackoverflow.png" "html- using ico as a"]
-																																						["assets/favicons/lw.png" "LessWrong"]
-																																						["assets/favicons/azl.png" "AZL"]
-																																						["assets/favicons/ssc.png" "Slate Star Codex"]
-																																						["assets/favicons/github.png" "Github: Home for your code"]
-																																						["assets/favicons/google.png" "Google"]])
-
-(def dummyTree (vector dummyValues [(nth dummyValues 3)] (vec (drop 4 (take 7 dummyValues))) [(nth dummyValues 7)] [(nth dummyValues 8)]))
-(def dummyTree [[(nth dummyValues 0) (take 4 dummyValues) ( drop 4 dummyValues)] 
-																[(nth dummyValues 1) () ()] 
-																[(nth dummyValues 2) [(nth dummyValues 5)] [(nth dummyValues 6)]] 
-																[(nth dummyValues 3) () ()] 
-																[(nth dummyValues 4) () ()]])
 
 
 ;;tree data struct [[node [nodes-to-the-left] [nodes-to-the-right]]....]

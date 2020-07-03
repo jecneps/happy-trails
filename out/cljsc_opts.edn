@@ -1,1 +1,1 @@
-{:main tree.core, :output-to "out/tree.js", :output-dir "out", :verbose true}
+{:main tree.live, :output-to "out/live.js", :output-dir "out", :verbose true}

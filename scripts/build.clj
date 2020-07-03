@@ -4,7 +4,7 @@
 
 (let [start (System/nanoTime)]
   (b/build "src"
-    {:main 'a.core
+    {:main 'components.core
      :output-to "out/a.js"
      :output-dir "out"
      :verbose true})

@@ -3,13 +3,24 @@
 												[clojure.core.match :refer [match]]))
 
 
-(defn tree_zip [root]
+
+
+(defn treeZip [root]
 		(zip/zipper 
 				#(:children %1)
 				#(:children %1)
 				(fn [node children] 
 						(with-meta {:self (:self node) :children (vec children)} (meta node)))
 				root))
+
+;;#########################
+;; generic zip utility
+;;##########################
+
+(defn getEnd [loc]
+		(if (zip/end? loc)
+				loc
+				(recur (zip/next loc))))
 
 (defn cleanNodes [nodes]
 		(map #(:self %) nodes))
@@ -29,7 +40,46 @@
 						[false true] (recur (zip/next l))
 						)))
 
+(defn removeChild [parent child]
+		(zip/replace parent (zip/make-node parent (zip/node parent) (filter #(not= child %) (zip/children parent)))))
 
+;;returns zipper minus this loc's children, and every only child 
+;; leading up to this loc
+(defn prunePath [loc]
+		(if-let [p (zip/up loc)]
+				(if (< 1 (count (zip/children p)))
+						(removeChild p loc)
+						(recur p))
+				nil))
+
+	(defn prune [loc]
+			(removeChild (zip/up loc) loc))
+
+;;possibly uncesseary indirection?
+
+
+;;#######################################
+;; USER FUNCTIONS
+;;######################################
+(defn page->zipNode [page]
+		{:self page})
+
+
+(defn backpage [loc]
+		(prune loc))
+
+
+(defn shiftClick [loc page]
+		(if (zip/branch? loc)
+				(zip/insert-child loc (page->zipNode page))
+				(zip/replace loc (zip/make-node loc (zip/node loc) [(page->zipNode page)])))
+		)
+
+
+
+;;###################################
+;; code for making component data
+;;###################################
 ;returns all leaves to the left and the right of loc
 (defn getLeaves [loc]
 		(let [right [] left []]
@@ -42,8 +92,6 @@
 										[false false] (recur (zip/next l)  primary secondary) ;nothing to see here
 								)))))
 
-
-
 (defn topLayer [loc]
 		(let [[l r] (getLeaves loc)]
 				[(-> loc zip/node :self) l r]))
@@ -51,7 +99,7 @@
 (defn middle [loc]
 		[(-> loc zip/node :self) (-> loc zip/lefts cleanNodes) (-> loc zip/rights cleanNodes)])
 
-(defn loc->compData [loc]
+(defn zip->compData [loc]
 		(loop [l loc data [(topLayer loc)]]
 				(if-let [next (zip/up l)]
 						(recur next (conj data (middle next)))
@@ -73,18 +121,9 @@
 																																																																										]}
 																																																						]}
 																																			]})
-(defn getEnd [loc]
-		(if (zip/end? loc)
-				loc
-				(recur (zip/next loc))))
 
-(def a (tree_zip dummyRoot))
+
+(def a (treeZip dummyRoot))
 (def six (-> a zip/down zip/down zip/right zip/right zip/down))
 
-;(println (zip/branch? (getEnd a)))
-(println (getLeaves six))
-(println (loc->compData six))
-
-
-;(js/console.log (getLeaves a))
 	

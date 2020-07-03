@@ -20,7 +20,8 @@ goog.addDependency("../sablono/core.js", ['sablono.core'], ['goog.dom', 'sablono
 goog.addDependency("../cljsjs/react-dom/development/react-dom.inc.js", ['react_dom', 'cljsjs.react.dom'], ['react'], {'foreign-lib': true});
 goog.addDependency("../rum/util.js", ['rum.util'], ['cljs.core']);
 goog.addDependency("../rum/core.js", ['rum.core'], ['goog.functions', 'rum.cursor', 'cljs.core', 'goog.object', 'cljsjs.react', 'rum.derived_atom', 'sablono.core', 'cljsjs.react.dom', 'rum.util']);
-goog.addDependency("../a/core.js", ['a.core'], ['clojure.browser.repl', 'rum.core', 'cljs.core', 'clojure.string']);
+goog.addDependency("../components/core.js", ['components.core'], ['clojure.browser.repl', 'rum.core', 'cljs.core', 'clojure.string']);
 goog.addDependency("../clojure/zip.js", ['clojure.zip'], ['cljs.core']);
 goog.addDependency("../cljs/core/match.js", ['cljs.core.match'], ['cljs.core']);
 goog.addDependency("../tree/core.js", ['tree.core'], ['clojure.zip', 'cljs.core', 'cljs.core.match']);
+goog.addDependency("../tree/live.js", ['tree.live'], ['components.core', 'clojure.zip', 'tree.core', 'rum.core', 'cljs.core']);

@@ -17,6 +17,11 @@
 ;; generic zip utility
 ;;##########################
 
+(defn getEnd [loc]
+		(if (zip/end? loc)
+				loc
+				(recur (zip/next loc))))
+
 (defn cleanNodes [nodes]
 		(map #(:self %) nodes))
 
@@ -36,13 +41,13 @@
 						)))
 
 (defn removeChild [parent child]
-		(zip/replace parent (zip/make-node parent (zip/node parent) (filter #(not= child %) (zip/children parent))))
+		(zip/replace parent (zip/make-node parent (zip/node parent) (filter #(not= child %) (zip/children parent)))))
 
 ;;returns zipper minus this loc's children, and every only child 
 ;; leading up to this loc
 (defn prunePath [loc]
 		(if-let [p (zip/up loc)]
-				(if (< 1 (count (zip/children p))
+				(if (< 1 (count (zip/children p)))
 						(removeChild p loc)
 						(recur p))
 				nil))
@@ -51,24 +56,24 @@
 			(removeChild (zip/up loc) loc))
 
 ;;possibly uncesseary indirection?
-(defn page->zipNode [page]
-		{:self page})
+
 
 ;;#######################################
 ;; USER FUNCTIONS
 ;;######################################
-
+(defn page->zipNode [page]
+		{:self page})
 
 
 (defn backpage [loc]
 		(prune loc))
 
-;;actually a bit tricky, need to add metadata to node
-(defn forwardpage [loc]
-		())
 
 (defn shiftClick [loc page]
-		(zip/insert-child loc (page->zipNode page)))
+		(if (zip/branch? loc)
+				(zip/insert-child loc (page->zipNode page))
+				(zip/replace loc (zip/make-node loc (zip/node loc) [(page->zipNode page)])))
+		)
 
 
 
@@ -116,10 +121,7 @@
 																																																																										]}
 																																																						]}
 																																			]})
-(defn getEnd [loc]
-		(if (zip/end? loc)
-				loc
-				(recur (zip/next loc))))
+
 
 (def a (treeZip dummyRoot))
 (def six (-> a zip/down zip/down zip/right zip/right zip/down))
