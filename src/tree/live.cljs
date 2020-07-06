@@ -88,9 +88,15 @@
 
 (println "all parsed!")
 
-;(println dummyLinearZip)
 
-(println (tree/zip->compData dummyZip))
-;(println (list (repeatedly 20 rpage)))
 
-(rum/mount (comp/tree (tree/zip->compData dummyZip)) js/document.body)
+(rum/defcs demoReactTree < (rum/local dummyZip ::key)
+		[state]
+		(let [local-atom (::key state)]
+				[:div (comp/tree (tree/zip->compData @local-atom)) 
+										[:button {:on-click (fn [_] (swap! local-atom tree/backpage))} "Backpage"]
+										]))
+
+
+
+(rum/mount (demoReactTree) js/document.body)
