@@ -26,6 +26,8 @@
 		[:div 
 				[:img.node-img {:src img_path}]])
 
+
+;; TODO change this to take a class string instead
 (rum/defc node [page nodeType]
 		(case nodeType
 				:taken [:button.node.taken (favicon (:favicon page)) (text (:preText page))]
