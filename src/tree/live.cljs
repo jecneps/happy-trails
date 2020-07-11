@@ -16,7 +16,7 @@
 																	(comp/Page. "https://www.google.com/" "assets/favicons/google.png" "Google")																									
 																])
 
-(println dummyPages)
+
 
 (defn rpage []
 		(rand-nth dummyPages))
@@ -90,12 +90,13 @@
 
 
 
-(rum/defcs demoReactTree < (rum/local dummyZip ::key)
+(rum/defcs demoReactTree < (rum/local (-> dummySimpleZip zip/up) ::key)
 		[state]
 		(let [local-atom (::key state)]
 				[:div (comp/tree (tree/zip->compData @local-atom)) 
 										[:button {:on-click (fn [_] (swap! local-atom tree/backpage))} "Backpage"]
 										]))
+
 
 
 

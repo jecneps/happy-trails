@@ -1,9 +1,22 @@
-.untaken {
-	background-color: #ff6300;
+
+.selected {
+	background-color: gold;
 }
 
-.taken {
-	background-color: #009cff;
+.future {
+	opacity: 50%;
+}
+
+.past {
+	background: grey;
+}
+
+.option {
+	background-color: silver;
+}
+
+.hidden-options {
+	border: 5px solid #ff6300;
 }
 
 .node {
@@ -32,7 +45,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	overflow-x: scroll;
 	width: 900px;
 	
 }
@@ -51,6 +63,3 @@ body {
     display: none;
 }
 
-:focus {
-	background-color: gold;
-}

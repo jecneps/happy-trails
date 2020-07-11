@@ -1,7 +1,8 @@
 (ns components.core
   (:require [clojure.browser.repl :as repl]
   										[rum.core :as rum]
-  										[clojure.string :as str]))
+  										[clojure.string :as str]
+  										[clojure.core.match :refer [match]]))
 
  (defonce conn
    (repl/connect "http://localhost:9000/repl"))
@@ -14,7 +15,7 @@
 
 (defrecord Page [link favicon preText])
 
-
+(def displayClass {:future "future" :past "past"})
 
 ;;##############################################
 ;; COMPS and COMP building code
@@ -28,23 +29,30 @@
 
 
 ;; TODO change this to take a class string instead
-(rum/defc node [page nodeType]
-		(case nodeType
-				:taken [:button.node.taken (favicon (:favicon page)) (text (:preText page))]
-				:untaken [:button.node.untaken (favicon (:favicon page)) (text (:preText page))])
+(rum/defc node 
+		[page class]
+				[:button.node {:class class} (favicon (:favicon page)) (text (:preText page))]
 		)
 
-(defn pages->nodes [data]
-		(map (fn [page] (node page :untaken)) data))
+(defn pages->nodes [data class]
+		(map (fn [page] (node page class)) data))
 
-(defn data->branch [[page left right]]
-		(concat (pages->nodes left) [(node page :taken)] (pages->nodes right)))
+(defn data->branch [{center :center lefts :lefts rights :rights display :display}]
+		(match [(= display :selected) (and (empty? lefts) (empty? rights))]
+				[true _] (concat (pages->nodes lefts "option") [(node center "selected")] (pages->nodes rights "option"))
+				[false true] [(node center (display displayClass))]
+				[false false] [(node center (str "hidden-options " (display displayClass)))]))
 
 (rum/defc branch [branchData]
+		(println branchData)
 		[:div.branch (data->branch branchData)])
 
 (rum/defc tree [data]
-	[:div.tree (map #(branch %) data)])
+		(println data)
+		[:div.tree (map #(branch %) data)])
+
+;;new shit ccummin
+
 
 
 
@@ -95,14 +103,16 @@
 								(.focus (horizontalFocus (. js/document -activeElement) key))))))
  				 
 
-(.addEventListener js/window "keydown" keyFocusHandler)
+;(.addEventListener js/window "keydown" keyFocusHandler)
 
 
 
 
 ;;tree data struct [[node [nodes-to-the-left] [nodes-to-the-right]]....]
 
-(rum/mount (tree dummyTree) js/document.body)
+; {:center Page :lefts [Page...] :rights [Page...] :display Selected|Future|Past}
+
+;(rum/mount (tree dummyTree) js/document.body)
 
 
 
